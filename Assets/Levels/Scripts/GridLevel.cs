@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Levels.Scripts;
 using UnityEngine;
+using UnityEngine.AI;
+using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
 
 public class GridLevel : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GridLevel : MonoBehaviour
     [SerializeField] private LevelData levelData;
     [SerializeField] private Vector3 origin;
     [SerializeField] private int scale;
+
+    
+    
     void Awake()
     {
         levelData.LevelObjects = new List<GameObject>();
@@ -48,7 +53,6 @@ public class GridLevel : MonoBehaviour
             for (int j = 0; j < m_GridSize; j++)
             {
                 GameObject x = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                x.transform.parent = _level.transform;
                 x.transform.position = new Vector3(i * scale, 0, j * scale) + origin;
                 x.transform.localScale = new Vector3(scale, scale, scale);
                 var m = m_Material[Random.Range(0, m_Material.Length)];
@@ -56,9 +60,16 @@ public class GridLevel : MonoBehaviour
                 x.tag = m.name;
                 x.name = $"({i}, {j})";
                 levelData.LevelObjects.Add(x.gameObject);
+                x.isStatic = true;
+                x.transform.parent = _level.transform;
             }
         }
+        NavMeshBuilder.BuildNavMesh();
     }
-    
+
+    public int GetUnitGridSize()
+    {
+        return scale;
+    }
     
 }

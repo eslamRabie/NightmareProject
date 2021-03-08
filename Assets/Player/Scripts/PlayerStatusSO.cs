@@ -8,6 +8,7 @@ namespace Player.Scripts
         [SerializeField] private IElement mainElement;
         [SerializeField] private PlayerElementalPowerLevels powerLevels;
         [SerializeField] private Vector3Int location;
+        [SerializeField] private float playerSpeed;
 
     }
 }
