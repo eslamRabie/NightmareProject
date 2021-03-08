@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Levels.Scripts;
 using UnityEngine;
 
 public class GridLevel : MonoBehaviour
@@ -10,11 +11,15 @@ public class GridLevel : MonoBehaviour
     [SerializeField] private Material[] m_Material;
     [SerializeField] private Material m_FloorMat;
     private GameObject _level;
-    [SerializeField] private GameObject m_Player; 
+    [SerializeField] private GameObject m_Player;
+    [SerializeField] private LevelData levelData;
+    [SerializeField] private Vector3 origin;
+    [SerializeField] private int scale;
     void Awake()
     {
-        CreateFloor();
-        CreateLevel(Vector3.zero);
+        levelData.LevelObjects = new List<GameObject>();
+        //CreateFloor();
+        CreateLevel(origin);
     }
 
     // Update is called once per frame
@@ -42,13 +47,15 @@ public class GridLevel : MonoBehaviour
         {
             for (int j = 0; j < m_GridSize; j++)
             {
-                var x = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                GameObject x = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 x.transform.parent = _level.transform;
-                x.transform.position = new Vector3(i, 0, j) + origin;
+                x.transform.position = new Vector3(i * scale, 0, j * scale) + origin;
+                x.transform.localScale = new Vector3(scale, scale, scale);
                 var m = m_Material[Random.Range(0, m_Material.Length)];
                 x.GetComponent<MeshRenderer>().material = m;
                 x.tag = m.name;
                 x.name = $"({i}, {j})";
+                levelData.LevelObjects.Add(x.gameObject);
             }
         }
     }
