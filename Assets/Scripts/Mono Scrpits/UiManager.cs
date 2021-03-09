@@ -21,13 +21,15 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     PlayerUiElemnt PlayerUiElemnt;
 
-    float playerAbilityCount;
+    GameObject[] ablitiesArray;
 
+    float playerAbilityCount;
 
     private void Awake()
     {
         playerUi.transform.GetChild(0).GetComponent<Image>().sprite = PlayerUiElemnt.PlayerIcon;
         playerAbilityCount = PlayerUiElemnt.PlayerAbilities.Length;
+        ablitiesArray = new GameObject[(int)playerAbilityCount];
         for (int i = 0; i < playerAbilityCount; i++)
         {
 
@@ -35,7 +37,9 @@ public class UiManager : MonoBehaviour
             childObject.transform.parent = abilityParentObj.transform;
             childObject.transform.GetChild(0).GetComponent<Image>().sprite = PlayerUiElemnt.PlayerAbilities[i].AbilityIcon;
             childObject.transform.GetChild(1).GetComponent<Image>().sprite = PlayerUiElemnt.PlayerAbilities[i].AbilityValueIcon;
-            childObject.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = PlayerUiElemnt.PlayerAbilities[i].AbilityValue.ToString();
+            childObject.transform.GetChild(1).GetComponent<Image>().fillAmount = PlayerUiElemnt.PlayerAbilities[i].AbilityValue / 10 ;
+            childObject.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = ((int )PlayerUiElemnt.PlayerAbilities[i].AbilityValue).ToString();
+            ablitiesArray[i] = childObject;
 
 
 
@@ -52,10 +56,16 @@ public class UiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        /*if(Input.GetKeyDown(KeyCode.Escape))
         {
             OnUiPuasedPannelCalled();
             Debug.Log("OnUiPuasedPannelCalled");
+        }*/
+        
+        for (int i = 0; i < playerAbilityCount; i++)
+        {
+            ablitiesArray[i].transform.GetChild(1).GetComponent<Image>().fillAmount = PlayerUiElemnt.PlayerAbilities[i].AbilityValue / 10;
+            ablitiesArray[i].transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = PlayerUiElemnt.PlayerAbilities[i].AbilityValue.ToString();
         }
     }
     public void OnUiButtonExit()
@@ -96,6 +106,17 @@ public class UiManager : MonoBehaviour
         //Time.timeScale = 0;
         pauseGameObj.SetActive(true);
         
+    }
+
+    [ContextMenu("Decrise ")]
+    public void OncCnageAblityCount()
+    {
+        if (PlayerUiElemnt.PlayerAbilities[0].AbilityValue > 0)
+        {
+            PlayerUiElemnt.PlayerAbilities[0].AbilityValue -= 1f;
+            ablitiesArray[0].transform.GetChild(1).GetComponent<Image>().fillAmount = PlayerUiElemnt.PlayerAbilities[0].AbilityValue / 10;
+            ablitiesArray[0].transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = ((int)PlayerUiElemnt.PlayerAbilities[0].AbilityValue).ToString();
+        }
     }
 
 }

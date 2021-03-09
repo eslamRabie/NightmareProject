@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04abfc20d723bbd48aeb16ff2fdc8f7a, type: 3}
-  m_Name: Fire
+  m_Script: {fileID: 11500000, guid: c4127de2a95c1b449931800f4ee396b5, type: 3}
+  m_Name: AbliyAmount
   m_EditorClassIdentifier: 
-  AbilityIcon: {fileID: 21300000, guid: 83f50dc4c8f4b1545a136563628ab721, type: 3}
-  AbilityValueIcon: {fileID: 21300000, guid: a32121504e14c124aba054602d6d7318, type: 3}
-  AbilityValue: 7
