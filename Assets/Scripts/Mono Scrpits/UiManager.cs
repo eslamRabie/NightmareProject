@@ -100,7 +100,7 @@ public class UiManager : MonoBehaviour
     {
         gameOverObj.SetActive(true);
     }
-
+    [ContextMenu("puase")]
     public void OnUiPuasedPannelCalled()
     {
         //Time.timeScale = 0;
@@ -109,7 +109,7 @@ public class UiManager : MonoBehaviour
     }
 
     [ContextMenu("Decrise ")]
-    public void OncCnageAblityCount()
+    public void OncCnageAblityCount(/*int index*/)
     {
         if (PlayerUiElemnt.PlayerAbilities[0].AbilityValue > 0)
         {
