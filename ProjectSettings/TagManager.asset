@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Earth
-  - Electricity
   - Fire
   - Ice
   - Water
   - Wind
+  - MysteryBox
+  - Electric
   layers:
   - Default
   - TransparentFX

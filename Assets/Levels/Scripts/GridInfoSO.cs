@@ -2,7 +2,7 @@
 
 namespace Levels.Scripts
 {
-    [CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
+    [CreateAssetMenu(fileName = "GridInfoSO", menuName = "GridInfoSO", order = 0)]
     public class GridInfoSO : ScriptableObject
     {
         [SerializeField] public int UnitGridSize;

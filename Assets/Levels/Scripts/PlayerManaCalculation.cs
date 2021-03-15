@@ -5,10 +5,11 @@ namespace Levels.Scripts
 {
     public class PlayerManaCalculation
     {
-        PlayerElementalPowerLevels CalculateMana(Vector3 playerPos, GridLevel gridLevel, Vector3 targetBoxPos)
+        public float CalculateMana(GameObject player, GameObject masteryBox, GameGrid grid,
+            float pathCostExtraMarginPercentage, float averageDistanceToMysteryBox)
         {
-            throw new System.NotImplementedException();
+            float mana = 0.0f;
+            return mana + (mana * pathCostExtraMarginPercentage);
         }
-
     }
 }
