@@ -8,64 +8,62 @@ using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
 
 namespace Player.Scripts
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager
     {
-        [SerializeField] public InteractiveObjectsDataSO playerStatusSo;
-        [SerializeField] public GridInfoSO gridInfoSo;
-        
         private PlayerMovement _playerMovement;
-        
         private NavMeshAgent _playerAgent;
-        
-        private NavMeshHit hit;
-        bool tmp = true;
-        
-        
-        private void Awake()
+        private GameObject _playerPrefab;
+
+        private bool _hasKey;
+
+
+        public PlayerManager(GameObject playerPrefab, int cellSize, float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
-            
-            _playerMovement = new PlayerMovement(transform.position, gridInfoSo);
-            gameObject.SetActive(false);
+            _playerPrefab = playerPrefab;
+            _playerMovement = new PlayerMovement(_playerPrefab.transform.position, cellSize);
+            ConfigureAgent(stoppingDistance, angularSpeed, speed, acceleration);
+            _hasKey = false;
         }
 
-        private void Start()
+        public void GetMovementInputEventListener(InputAction.CallbackContext context)
         {
-            ConfigureAgent();
-            gameObject.SetActive(true);
-        }
-
-        private void FixedUpdate()
-        {
-            if(_playerAgent.isOnNavMesh)
-                _playerAgent.destination = _playerMovement.MovePlayer(transform);
-        }
-
-        public void GetMovementInput(InputAction.CallbackContext context)
-        {
-            Debug.Log("input");
             if(context.performed)
                 _playerMovement.UpdateMovementVector(context.ReadValue<Vector2>());
         }
 
 
-        public void CreatePlayer()
+        public void UpdatePlayer()
         {
-            
+            if(_playerAgent.isOnNavMesh)
+                _playerAgent.destination = _playerMovement.MovePlayer(_playerPrefab.transform);
         }
         
-        void ConfigureAgent()
+        
+        void ConfigureAgent(float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
             NavMeshBuilder.BuildNavMesh();
             if(NavMeshBuilder.isRunning) Debug.Log("running");
-            _playerAgent = this.gameObject.AddComponent<NavMeshAgent>();
-            _playerAgent.stoppingDistance = 0.0f;
-            _playerAgent.angularSpeed = 9999;
-            _playerAgent.speed = 20;
-            _playerAgent.acceleration = 20;
-            
+            _playerAgent = _playerPrefab.gameObject.AddComponent<NavMeshAgent>();
+            _playerAgent.stoppingDistance = stoppingDistance;
+            _playerAgent.angularSpeed = angularSpeed;
+            _playerAgent.speed = speed;
+            _playerAgent.acceleration = acceleration;
         }
-        
-        
+
+        public void SetPosition(Vector3 position)
+        {
+            _playerPrefab.transform.position = position;
+        }
+
+        public bool GetKeyStatus()
+        {
+            return _hasKey;
+        }
+
+        public void AcquireKey()
+        {
+            _hasKey = true;
+        }
         
     }
 }

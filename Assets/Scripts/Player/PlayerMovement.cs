@@ -13,18 +13,17 @@ public class PlayerMovement
 
     private Vector3 target;
     private NavMeshHit hit;
-    private InteractiveObjectsDataSO _playerStatusSo;
 
     private int unitMove;
     private Vector3 position;
     private float rotatingAngle = 0;
 
 
-    public PlayerMovement(Vector3 position, GridInfoSO gridInfoSo)
+    public PlayerMovement(Vector3 position, int cellSize)
     {
         target = position;
         _movementQueue = new Queue<Vector2>();
-        unitMove = gridInfoSo.UnitGridSize;
+        unitMove = cellSize;
         
     }
     

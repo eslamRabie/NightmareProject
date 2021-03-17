@@ -56,8 +56,11 @@ namespace GameManager
             NavMeshBuilder.ClearAllNavMeshes();
             NavMeshBuilder.BuildNavMesh();
             oldParent =  _levelManager.CreateLevel(playerLevel, "water");
-            Debug.Log(playerLevel);
         }
+
+        
+        
+        
         
     }
 }
