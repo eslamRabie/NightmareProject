@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Levels.Scripts
+namespace Level
 {
     [CreateAssetMenu(fileName = "MysteryBoxPrefabsSO", menuName = "MysteryBoxPrefabsSO", order = 0)]
     public class MysteryBoxPrefabsSO : ScriptableObject

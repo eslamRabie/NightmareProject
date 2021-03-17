@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Levels.Scripts.Elements;
 using Unity.Mathematics;
-using UnityEditor.AI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Levels.Scripts
+namespace Level
 {
     public class GameGrid
     {

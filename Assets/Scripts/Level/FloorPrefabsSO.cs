@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Player.Scripts;
 using UnityEngine;
 
-namespace Levels.Scripts
+namespace Level
 {
     [CreateAssetMenu(fileName = "FloorPrefabsSO", menuName = "FloorPrefabsSO", order = 0)]
     public class FloorPrefabsSO : ScriptableObject

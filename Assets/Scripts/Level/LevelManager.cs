@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Levels.Scripts;
-using Levels.Scripts.MysteryBox;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Player;
 
-namespace Player.Scripts
+namespace Level
 {
     public class LevelManager
     {

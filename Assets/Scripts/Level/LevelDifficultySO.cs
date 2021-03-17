@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Levels.Scripts
+namespace Level
 {
     [CreateAssetMenu(fileName = "LevelDifficultySO", menuName = "LevelDifficultySO", order = 0)]
     public class LevelDifficultySO : ScriptableObject

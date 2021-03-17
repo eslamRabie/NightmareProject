@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs.meta
 guid: 46f848aff9ab91d4c92ee0cda89f87d0
+=======
+guid: 07b32c89025d59e429ce2c715e421955
+>>>>>>> origin/Nasser:Assets/Prefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

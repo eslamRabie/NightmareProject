@@ -1,7 +1,6 @@
-using Player.Scripts;
 using UnityEngine;
 
-namespace Levels.Scripts
+namespace Level
 {
     public class PlayerManaCalculation
     {

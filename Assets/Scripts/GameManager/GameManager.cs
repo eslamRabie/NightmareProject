@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Levels.Scripts;
-using Player.Scripts;
+using Level;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -16,37 +16,35 @@ namespace GameManager
         [SerializeField]private FloorPrefabsSO floorPrefabs;
         [SerializeField] private MysteryBoxPrefabsSO mysteryBoxPrefabs;
         [SerializeField] private LevelDifficultySO levelDifficulty;
-        [SerializeField] private GridInfoSO gridInfoSo;
-        [SerializeField] private InteractiveObjectsDataSO playerStatus;
         [SerializeField] private int maxNumberOfLevels;
         [SerializeField] private int basicGridSize;
         [SerializeField] private int numOfPlayers;
+        [SerializeField] private UiManager _uiManager;
 
         [SerializeField] private GameObject player;
         
-        private List<InteractiveObjectsDataSO> gameObjectsData;
         private LevelManager _levelManager;
-        private PlayerManager _playerManager;
+        private Player.Player _player;
         private GameObject oldParent;
         
-        
         [SerializeField] private int playerLevel;
+
+        private List<Player.Player> _playersList;
+        
         private void Awake()
         {
             
             _levelManager = new LevelManager(playersPrefabs, floorPrefabs, mysteryBoxPrefabs, levelDifficulty,
                 maxNumberOfLevels, basicGridSize, numOfPlayers);
             oldParent = _levelManager.CreateLevel(playerLevel, "fire");
-            
-            
-            
-            
-            _playerManager = player.GetComponent<PlayerManager>();
-            
-            
-            
+            //_uiManager.
+            _player = new Player.Player(playersPrefabs.playerPrefabs[0],floorPrefabs.floorPrefabs[0].transform.localScale.x,
+                0, 200, 10, 10);
+        }
 
-
+        private void Update()
+        {
+            _player.UpdatePlayer();
         }
 
 
@@ -58,7 +56,6 @@ namespace GameManager
             oldParent =  _levelManager.CreateLevel(playerLevel, "water");
         }
 
-        
         
         
         
