@@ -118,5 +118,23 @@ public class UiManager : MonoBehaviour
             ablitiesArray[0].transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = ((int)PlayerUiElemnt.PlayerAbilities[0].AbilityValue).ToString();
         }
     }
+    /* private void OnCollisionEnter(Collision collision)
+     {
+         PlayerAbility player = GetComponent<PlayerAbility>();
+         if(player !=null)
+         {
+             player.takedamage();
+         }
+     }*/
 
+    public void OncSelectAblity(int index)
+    {
+        // 0  -- water
+        // 1  -- fire
+        // 2  -- ground
+        // 3  -- air
+        // 4  -- ice
+
+        Debug.Log("index "+ index);
+    }
 }
