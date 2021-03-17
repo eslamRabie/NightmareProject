@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Player;
 
 namespace Level
 {
@@ -10,7 +9,6 @@ namespace Level
         
         
         private List<GameGrid> _leveGridList;
-        private PlayersPrefabsSO _playersPrefabs;
         private FloorPrefabsSO _floorPrefabs;
         private MysteryBoxPrefabsSO _mysteryBoxPrefabs;
         private LevelDifficultySO _levelDifficulty;
@@ -22,12 +20,11 @@ namespace Level
         private GameObject _currentLevelParent;
 
 
-        public LevelManager(PlayersPrefabsSO playersPrefabs, FloorPrefabsSO floorPrefabs, MysteryBoxPrefabsSO mysteryBoxPrefabs,
+        public LevelManager(FloorPrefabsSO floorPrefabs, MysteryBoxPrefabsSO mysteryBoxPrefabs,
             LevelDifficultySO levelDifficulty, int maxNumberOfLevels, int basicGridSize, int numOfPlayers)
         {
             _leveGridList = new List<GameGrid>();
             
-            _playersPrefabs = playersPrefabs;
             _floorPrefabs = floorPrefabs;
             _mysteryBoxPrefabs = mysteryBoxPrefabs;
             _levelDifficulty = levelDifficulty;

@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c8afba530245f3954250002dd0c4f9, type: 3}
   m_Name: PlayersPrefabsSO
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp:Player:PlayersPrefabsSO
   playerPrefabs:
-  - {fileID: 5116596236945396187, guid: 99c424dfdfd7d024bb2a4785040508e1, type: 3}
+  - {fileID: 4948353410339410994, guid: b78c7bbe64a8d7c479d175f5459c3c0b, type: 3}
