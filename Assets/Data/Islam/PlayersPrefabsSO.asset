@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Player:PlayersPrefabsSO
   playerPrefabs:
   - {fileID: 4948353410339410994, guid: b78c7bbe64a8d7c479d175f5459c3c0b, type: 3}
+  - {fileID: 4948353410339410994, guid: 0de71a873972a544fb889d6ea41b745e, type: 3}

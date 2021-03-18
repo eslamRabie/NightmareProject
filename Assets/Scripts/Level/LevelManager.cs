@@ -124,8 +124,15 @@ namespace Level
             foreach (var grid in _leveGridList)
             {
                 GameGrid.AaBb aabb = grid.GetAABB();
-                playerPositions.Add(new Vector3(Random.Range(aabb.TopLeft.x, aabb.BottomLeftDeltaX.x), aabb.TopLeft.y,
-                    Random.Range(aabb.TopLeft.z, aabb.TopRightDeltaZ.z)));
+                var cellSize = _floorPrefabs.floorPrefabs[0].transform.localScale.x;
+                /*playerPositions.Add(new Vector3(Random.Range(aabb.TopLeft.x, aabb.BottomLeftDeltaX.x), aabb.TopLeft.y,
+                    Random.Range(aabb.TopLeft.z, aabb.TopRightDeltaZ.z)));*/
+                playerPositions.Add(new Vector3(
+                    aabb.TopLeft.x + (Random.Range(0, _basicGridSize + 1) * cellSize),
+                    aabb.TopLeft.y,
+                    aabb.TopLeft.z + Random.Range(0, _basicGridSize + 1) * cellSize
+                    ));
+                
             }
 
             return playerPositions;

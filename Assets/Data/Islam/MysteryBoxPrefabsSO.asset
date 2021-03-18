@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MysteryBoxPrefabsSO
   m_EditorClassIdentifier: 
   mysteryBoxPrefabs:
-  - {fileID: 5116596236945396187, guid: 99c424dfdfd7d024bb2a4785040508e1, type: 3}
+  - {fileID: 417783794520366343, guid: 38dac9b26a8f41340ac5455ce8f6f344, type: 3}

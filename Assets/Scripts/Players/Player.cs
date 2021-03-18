@@ -14,6 +14,7 @@ namespace Players
         private bool _hasKey;
         private string _element;
         private float _mana;
+        private bool _isDead = false;
         public int PlayerLevel { get; set; }
 
         private void Awake()
@@ -22,13 +23,18 @@ namespace Players
             _animator = GetComponentInChildren<Animator>();
         }
 
-        public void CreatePlayer(float mana, float cellSize, float stoppingDistance, float angularSpeed, float speed, float acceleration)
+        
+        
+        public void CreatePlayer(string element, float mana, float cellSize, float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
             _mana = mana;
             _playerMovement = new PlayerMovement(transform.position, cellSize);
             ConfigureAgent(stoppingDistance, angularSpeed, speed, acceleration);
             _hasKey = false;
             gameObject.SetActive(true);
+            _element = element;
+            _isDead = false;
+            _animator.SetBool("IsDead", false);
         }
         
         
@@ -41,11 +47,14 @@ namespace Players
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if(_playerAgent.isOnNavMesh)
-                _playerAgent.destination = _playerMovement.MovePlayer(transform);
-            _animator.SetFloat(0, _playerAgent.velocity.sqrMagnitude / _playerAgent.speed);
+            if (!_isDead)
+            {
+                if (_playerAgent.isOnNavMesh)
+                    _playerAgent.destination = _playerMovement.MovePlayer(transform);
+                _animator.SetFloat("SpeedZ", _playerAgent.velocity.sqrMagnitude);
+            }
         }
         
         
@@ -58,6 +67,9 @@ namespace Players
             _playerAgent.angularSpeed = angularSpeed;
             _playerAgent.speed = speed;
             _playerAgent.acceleration = acceleration;
+            //_playerAgent.baseOffset = 0.4f;
+            _playerAgent.height = 1;
+            _playerAgent.radius = 0.25f;
         }
 
         public void SetPosition(Vector3 position)
@@ -84,6 +96,11 @@ namespace Players
         public void UpdateMana(float value)
         {
             _mana += value;
+            if (_mana <= 0)
+            {
+                _animator.SetBool("IsDead", true);
+                _isDead = true;
+            }
         }
 
         private void OnCollisionEnter(Collision other)
@@ -91,8 +108,17 @@ namespace Players
             if (!other.gameObject.CompareTag(_element))
             {
                 UpdateMana(-5);
+                _animator.SetTrigger("Pain");
+                Debug.Log(_mana);
             }
             
         }
+
+        public bool GetDeadStatus()
+        {
+            return _isDead;
+        }
+        
+       
     }
 }
