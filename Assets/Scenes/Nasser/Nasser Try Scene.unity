@@ -525,5 +525,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'UI lEVEL 0 '
       objectReference: {fileID: 0}
+    - target: {fileID: 8854963082159291902, guid: b905eb2597549704b9a7ca8172895e77, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5dcbc859bf843974f88d70ad7779e364, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b905eb2597549704b9a7ca8172895e77, type: 3}

@@ -70,7 +70,7 @@ public class UImangerLevel1 : MonoBehaviour
 
     public void OncSelectcharcter()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         playerIndex = showModels.selectedPlayer;
         Debug.Log("index " + playerIndex);
         FindObjectOfType<AudioManager>().playAudio("Click");

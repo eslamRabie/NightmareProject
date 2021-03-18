@@ -135,5 +135,9 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void PlayClickSound()
+    {
+        FindObjectOfType<AudioManager>().playAudio("Click");
+    }
 
 }
