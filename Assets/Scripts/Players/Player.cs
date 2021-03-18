@@ -17,7 +17,7 @@ namespace Players
         private float _mana;
         private bool _isDead = false;
 
-        private CinemachineFreeLook _playerCamera;
+        //private CinemachineFreeLook _playerCamera;
         public int PlayerLevel { get; set; }
 
         private bool _isPause;
@@ -29,8 +29,10 @@ namespace Players
         {
             gameObject.SetActive(false);
             _animator = GetComponentInChildren<Animator>();
-            CinemachineCore.GetInputAxis = GetAxisCustom;
-            _playerCamera = GetComponentInChildren<CinemachineFreeLook>();
+            
+            /*_playerCamera = GetComponentInChildren<CinemachineFreeLook>();
+            CinemachineCore.GetInputAxis = GetAxisCustom;*/
+            
         }
 
         
@@ -158,7 +160,7 @@ namespace Players
         {
             if (!other.gameObject.CompareTag(_element))
             {
-                UpdateMana(-5);
+                UpdateMana(-1);
                // _animator.SetTrigger("Pain");
                 Debug.Log(_mana);
             }
@@ -171,9 +173,9 @@ namespace Players
         }
         
         
-        public void CalculateMana(float basicGridSize)
+        public void CalculateMana(float basicGridSize, int maxNumOfLevels)
         {
-            _mana = basicGridSize * (basicGridSize / PlayerLevel);
+            _mana = basicGridSize / (PlayerLevel / (float)maxNumOfLevels);
         }
        
     }

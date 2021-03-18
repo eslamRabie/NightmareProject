@@ -1,18 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using MysteryBox;
+using Players;
 using UnityEngine;
 
-public class KeyBox : MonoBehaviour
+public class KeyBox : MonoBehaviour, IMysteryBox
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _shape;
+    
+
+    public void Reveal()
     {
-        
+        _shape.SetActive(true);
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Reveal();
+            other.gameObject.GetComponent<Player>().AcquireKey();
+        }
     }
 }

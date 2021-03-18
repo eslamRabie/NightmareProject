@@ -49,7 +49,7 @@ namespace Level
             ClearGridList();
             
             _currentLevelParent = new GameObject();
-            Vector3 gridOrigin = Vector3.zero;
+            Vector3 gridOrigin = Vector3.up * 5;
             int levelGridSize = _basicGridSize + playerLevel;
             CalculateDifficulty(playerLevel);
             for (int i = 0; i < _numOfPlayers; i++)
@@ -115,7 +115,7 @@ namespace Level
                 var poses = DistributePlayers();
                 foreach (var pos in poses)
                 {
-                    var posInY = pos + Vector3.up * _floorPrefabs.floorPrefabs[0].transform.localScale.y;
+                    var posInY = pos + Vector3.up * _floorPrefabs.floorPrefabs[0].transform.localScale.y / 2.0f;
                     _mysteryBoxesList.Add(GameObject.Instantiate(boxType, posInY, Quaternion.identity));
                 }
             }

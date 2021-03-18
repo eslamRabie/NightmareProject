@@ -52,7 +52,7 @@ namespace GameManager
             var cellSize = floorPrefabs.floorPrefabs[0].transform.localScale.x;
             _player.CreatePlayer(playerPos, playerElement, cellSize, 0, 200, 10, 10);
             _player.PlayerLevel = playerLevel;
-            _player.CalculateMana(basicGridSize);
+            _player.CalculateMana(basicGridSize, maxNumberOfLevels);
         }
 
         private void Update()
@@ -85,7 +85,7 @@ namespace GameManager
             var cellSize = floorPrefabs.floorPrefabs[0].transform.localScale.x;
             _player.CreatePlayer(playerPos, playerElement, cellSize, 0, 200, 10, 10);
             _player.PlayerLevel++;
-            _player.CalculateMana(basicGridSize);
+            _player.CalculateMana(basicGridSize, maxNumberOfLevels);
         }
         
         
