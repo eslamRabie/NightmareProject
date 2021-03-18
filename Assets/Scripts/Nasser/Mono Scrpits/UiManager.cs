@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,8 @@ public class UiManager : MonoBehaviour
     GameObject victoryGameObj;
     [SerializeField]
     GameObject selectAbilityUi;
+    [SerializeField]
+    TMP_Text onSelectAbilityUi;
     [SerializeField]
     GameObject selectCharcterUi;
 
@@ -74,6 +77,7 @@ public class UiManager : MonoBehaviour
         gameOverObj.SetActive(false);
         victoryGameObj.SetActive(false);
         pauseGameObj.SetActive(false);
+        onSelectAbilityUi.gameObject.SetActive(false);
         
     }
 
@@ -151,8 +155,9 @@ public class UiManager : MonoBehaviour
         // 2  -- ground
         // 3  -- Wind
         // 4  -- ice
-
+        onSelectAbilityUi.gameObject.SetActive(true);
         abilitesIndex = (Abilites)index;
+        onSelectAbilityUi.text = "you select " + (Abilites)index;
         Debug.Log("index " + abilitesIndex  );
     }
 
