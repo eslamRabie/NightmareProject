@@ -19,19 +19,9 @@ public class UiManager : MonoBehaviour
     GameObject pauseGameObj;
     [SerializeField]
     GameObject victoryGameObj;
-    [SerializeField]
-    GameObject selectAbilityUi;
-    [SerializeField]
-    TMP_Text onSelectAbilityUi;
-    [SerializeField]
-    GameObject selectCharcterUi;
-
 
     [SerializeField]
     PlayerUiElemnt PlayerUiElemnt;
-    [SerializeField]
-    ShowModels showModels;
-    
 
     GameObject[] ablitiesArray;
 
@@ -72,12 +62,10 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectAbilityUi.SetActive(true);
-        selectCharcterUi.SetActive(false);
+
         gameOverObj.SetActive(false);
         victoryGameObj.SetActive(false);
         pauseGameObj.SetActive(false);
-        onSelectAbilityUi.gameObject.SetActive(false);
         
     }
 
@@ -148,29 +136,4 @@ public class UiManager : MonoBehaviour
     }
 
 
-    public void OncSelectAblity(int index)
-    {
-        // 0  -- water
-        // 1  -- fire
-        // 2  -- ground
-        // 3  -- Wind
-        // 4  -- ice
-        onSelectAbilityUi.gameObject.SetActive(true);
-        abilitesIndex = (Abilites)index;
-        onSelectAbilityUi.text = "you select " + (Abilites)index;
-        Debug.Log("index " + abilitesIndex  );
-    }
-
-    public void Selectplayer()
-    {
-        selectAbilityUi.SetActive(false);
-        selectCharcterUi.SetActive(true);
-    }
-
-    public void OncSelectcharcter()
-    {
-      
-        playerIndex =showModels.selectedPlayer ; 
-        Debug.Log("index " + playerIndex);
-    }
 }

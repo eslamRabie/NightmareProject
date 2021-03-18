@@ -46,21 +46,21 @@ MonoBehaviour:
   sounds:
   - name: Theme
     clip: {fileID: 8300000, guid: 56ed4a4230594844290059ba9cc806f1, type: 3}
-    volume: 0.558
+    volume: 0.3
     loop: 1
     AudioSource: {fileID: 0}
   - name: Win
     clip: {fileID: 8300000, guid: eb4be580f56c7c54ea6480fc7e9a92cd, type: 3}
-    volume: 0.562
+    volume: 0.3
     loop: 0
     AudioSource: {fileID: 0}
   - name: Click
     clip: {fileID: 8300000, guid: b15c296d11bf21548a551469d043c07c, type: 3}
-    volume: 1
+    volume: 0.8
     loop: 0
     AudioSource: {fileID: 0}
   - name: Lose
     clip: {fileID: 8300000, guid: a9518ab12303f164385e5e396cdaa7db, type: 3}
-    volume: 0.549
+    volume: 0.3
     loop: 0
     AudioSource: {fileID: 0}
