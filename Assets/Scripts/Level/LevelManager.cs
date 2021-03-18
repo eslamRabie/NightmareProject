@@ -18,6 +18,7 @@ namespace Level
         private int _id;
         private int _numOfPlayers;
         private GameObject _currentLevelParent;
+        private List<GameObject> _mysteryBoxesList;
 
 
         public LevelManager(FloorPrefabsSO floorPrefabs, MysteryBoxPrefabsSO mysteryBoxPrefabs,
@@ -35,6 +36,7 @@ namespace Level
             _isLevelCreated = false;
             _id = 1;
             _currentLevelParent = new GameObject();
+            _mysteryBoxesList = new List<GameObject>();
 
         }
         
@@ -101,13 +103,20 @@ namespace Level
 
         void DistributeMysteryBoxes()
         {
+            for (int i = 0; i < _mysteryBoxesList.Count; i++)
+            {
+                var tmp = _mysteryBoxesList[i];
+                _mysteryBoxesList[i] = null;
+                GameObject.Destroy(tmp);
+            }
+            
             foreach (var boxType in _mysteryBoxPrefabs.mysteryBoxPrefabs)
             {
                 var poses = DistributePlayers();
                 foreach (var pos in poses)
                 {
                     var posInY = pos + Vector3.up * _floorPrefabs.floorPrefabs[0].transform.localScale.y;
-                    GameObject.Instantiate(boxType, posInY, Quaternion.identity);
+                    _mysteryBoxesList.Add(GameObject.Instantiate(boxType, posInY, Quaternion.identity));
                 }
             }
         }
@@ -129,7 +138,7 @@ namespace Level
                     Random.Range(aabb.TopLeft.z, aabb.TopRightDeltaZ.z)));*/
                 playerPositions.Add(new Vector3(
                     aabb.TopLeft.x + (Random.Range(0, _basicGridSize + 1) * cellSize),
-                    aabb.TopLeft.y,
+                    aabb.TopLeft.y + cellSize / 2.0f ,
                     aabb.TopLeft.z + Random.Range(0, _basicGridSize + 1) * cellSize
                     ));
                 

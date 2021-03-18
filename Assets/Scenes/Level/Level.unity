@@ -266,9 +266,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -293,8 +293,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135110364}
-  m_LocalRotation: {x: 0.18366264, y: -0.03966661, z: 0.007417598, w: 0.9821607}
-  m_LocalPosition: {x: 0.5, y: 2.4100003, z: -6.18}
+  m_LocalRotation: {x: 0.32326594, y: 0.000000032880077, z: -0.000000011232079, w: 0.9463082}
+  m_LocalPosition: {x: 0, y: 2.5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -382,9 +382,9 @@ MonoBehaviour:
   mysteryBoxPrefabs: {fileID: 11400000, guid: 31ee8b8b29b28444d911347009902825, type: 2}
   levelDifficulty: {fileID: 11400000, guid: 04042c05d9bcce845a42d17ac8b5936f, type: 2}
   maxNumberOfLevels: 10
-  basicGridSize: 6
+  basicGridSize: 10
   numOfPlayers: 1
   _uiManager: {fileID: 0}
-  playerLevel: 1
+  playerLevel: 5
   mana: 100
   playerElement: Water

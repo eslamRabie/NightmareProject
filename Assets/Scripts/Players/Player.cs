@@ -1,4 +1,5 @@
 ﻿using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -15,24 +16,38 @@ namespace Players
         private string _element;
         private float _mana;
         private bool _isDead = false;
+
+        private CinemachineFreeLook _playerCamera;
         public int PlayerLevel { get; set; }
+
+        private bool _isPause;
+        private bool _isCreated = false;
+
+        private Vector2 _deltaMouse;
 
         private void Awake()
         {
             gameObject.SetActive(false);
             _animator = GetComponentInChildren<Animator>();
+            CinemachineCore.GetInputAxis = GetAxisCustom;
+            _playerCamera = GetComponentInChildren<CinemachineFreeLook>();
         }
 
         
         
-        public void CreatePlayer(string element, float mana, float cellSize, float stoppingDistance, float angularSpeed, float speed, float acceleration)
+        public void CreatePlayer(Vector3 playerPosition, string element, float cellSize, float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
-            _mana = mana;
-            _playerMovement = new PlayerMovement(transform.position, cellSize);
-            ConfigureAgent(stoppingDistance, angularSpeed, speed, acceleration);
+            transform.position = playerPosition;
+            if (!_isCreated)
+            {
+                _isCreated = true;
+                _playerMovement = new PlayerMovement(transform.position, cellSize);
+                ConfigureAgent(stoppingDistance, angularSpeed, speed, acceleration);
+                gameObject.SetActive(true);
+                _element = element;
+            }
+
             _hasKey = false;
-            gameObject.SetActive(true);
-            _element = element;
             _isDead = false;
             _animator.SetBool("IsDead", false);
         }
@@ -45,14 +60,49 @@ namespace Players
                 _playerMovement.UpdateMovementVector(context.ReadValue<Vector2>());
             
         }
+        
+        
+        
+        public void ControllCamera(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                RotateCamera(context.ReadValue<Vector2>());
+            }
+        }
 
-
+        public float GetAxisCustom(string axisName)
+        {
+            var LookDelta = _deltaMouse;
+            LookDelta.Normalize();
+            if (axisName == "Mouse X")
+            {
+                return LookDelta.x;
+            }
+            if (axisName == "Mouse Y")
+            {
+                Debug.Log(LookDelta);
+                _deltaMouse = Vector2.zero;
+                return LookDelta.y;
+            }
+            return 0;
+        }
+        
+        
+        void RotateCamera(Vector2 delta)
+        {
+            _deltaMouse = delta;
+        }
+        
+        
         private void FixedUpdate()
         {
             if (!_isDead)
             {
                 if (_playerAgent.isOnNavMesh)
-                    _playerAgent.destination = _playerMovement.MovePlayer(transform);
+                {
+                    _playerAgent.destination = _playerMovement.MovePlayer(transform);;
+                }
                 _animator.SetFloat("SpeedZ", _playerAgent.velocity.sqrMagnitude);
             }
         }
@@ -61,7 +111,7 @@ namespace Players
         void ConfigureAgent(float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
             NavMeshBuilder.BuildNavMesh();
-            if(NavMeshBuilder.isRunning) Debug.Log("running");
+            //if(NavMeshBuilder.isRunning) Debug.Log("running");
             _playerAgent = gameObject.AddComponent<NavMeshAgent>();
             _playerAgent.stoppingDistance = stoppingDistance;
             _playerAgent.angularSpeed = angularSpeed;
@@ -90,6 +140,7 @@ namespace Players
         public float GetMana()
         {
             return _mana;
+            //_playerCamera.transform.rotation = Quaternion.Slerp();
         }
 
 
@@ -108,7 +159,7 @@ namespace Players
             if (!other.gameObject.CompareTag(_element))
             {
                 UpdateMana(-5);
-                _animator.SetTrigger("Pain");
+               // _animator.SetTrigger("Pain");
                 Debug.Log(_mana);
             }
             
@@ -119,6 +170,11 @@ namespace Players
             return _isDead;
         }
         
+        
+        public void CalculateMana(float basicGridSize)
+        {
+            _mana = basicGridSize * (basicGridSize / PlayerLevel);
+        }
        
     }
 }

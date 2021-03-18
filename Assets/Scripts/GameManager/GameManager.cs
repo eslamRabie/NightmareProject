@@ -44,13 +44,15 @@ namespace GameManager
             
             oldParent = _levelManager.CreateLevel(playerLevel, playerElement);
             //_uiManager.
-            _playerPrefab = Instantiate(playersPrefabs.playerPrefabs[1].gameObject);
+            _playerPrefab = Instantiate(playersPrefabs.playerPrefabs[0].gameObject);
 
-            CalculateMana();
+            
             _player = _playerPrefab.GetComponent<Player>();
-            _player.SetPosition(_levelManager.DistributePlayers()[0]);
-            _player.CreatePlayer(playerElement, mana, floorPrefabs.floorPrefabs[0].transform.localScale.x, 0, 200, 10, 10);
+            var playerPos = _levelManager.DistributePlayers()[0];
+            var cellSize = floorPrefabs.floorPrefabs[0].transform.localScale.x;
+            _player.CreatePlayer(playerPos, playerElement, cellSize, 0, 200, 10, 10);
             _player.PlayerLevel = playerLevel;
+            _player.CalculateMana(basicGridSize);
         }
 
         private void Update()
@@ -73,12 +75,19 @@ namespace GameManager
             NavMeshBuilder.ClearAllNavMeshes();
             NavMeshBuilder.BuildNavMesh();
             oldParent =  _levelManager.CreateLevel(playerLevel, playerElement);
+            PlayerNewLevel();
         }
 
-        void CalculateMana()
+
+        void PlayerNewLevel()
         {
-            mana = basicGridSize * (basicGridSize / playerLevel);
+            var playerPos = _levelManager.DistributePlayers()[0];
+            var cellSize = floorPrefabs.floorPrefabs[0].transform.localScale.x;
+            _player.CreatePlayer(playerPos, playerElement, cellSize, 0, 200, 10, 10);
+            _player.PlayerLevel++;
+            _player.CalculateMana(basicGridSize);
         }
+        
         
         
     }
