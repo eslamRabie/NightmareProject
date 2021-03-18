@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Nasser/Nasser Try Scene.unity
+    guid: 12558c6e51050194a94ffb89de93f7ef
+  - enabled: 1
+    path: Assets/Scenes/Nasser/GameplayScene.unity
+    guid: ec0958da9c799ec4dac0ed9f3c332a0f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a52e169b81857af4c9a3c63d69d53562, type: 2}

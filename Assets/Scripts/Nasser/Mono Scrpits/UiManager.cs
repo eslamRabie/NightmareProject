@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -18,17 +19,9 @@ public class UiManager : MonoBehaviour
     GameObject pauseGameObj;
     [SerializeField]
     GameObject victoryGameObj;
-    [SerializeField]
-    GameObject selectAbilityUi;
-    [SerializeField]
-    GameObject selectCharcterUi;
-
 
     [SerializeField]
     PlayerUiElemnt PlayerUiElemnt;
-    [SerializeField]
-    ShowModels showModels;
-    
 
     GameObject[] ablitiesArray;
 
@@ -69,8 +62,7 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectAbilityUi.SetActive(true);
-        selectCharcterUi.SetActive(false);
+
         gameOverObj.SetActive(false);
         victoryGameObj.SetActive(false);
         pauseGameObj.SetActive(false);
@@ -143,29 +135,9 @@ public class UiManager : MonoBehaviour
         }
     }
 
-
-    public void OncSelectAblity(int index)
+    public void PlayClickSound()
     {
-        // 0  -- water
-        // 1  -- fire
-        // 2  -- ground
-        // 3  -- Wind
-        // 4  -- ice
-
-        abilitesIndex = (Abilites)index;
-        Debug.Log("index " + abilitesIndex  );
+        FindObjectOfType<AudioManager>().playAudio("Click");
     }
 
-    public void Selectplayer()
-    {
-        selectAbilityUi.SetActive(false);
-        selectCharcterUi.SetActive(true);
-    }
-
-    public void OncSelectcharcter()
-    {
-      
-        playerIndex =showModels.selectedPlayer ; 
-        Debug.Log("index " + playerIndex);
-    }
 }
