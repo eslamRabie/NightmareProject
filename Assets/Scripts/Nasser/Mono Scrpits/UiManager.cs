@@ -19,11 +19,23 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     GameObject victoryGameObj;
     [SerializeField]
+    GameObject selectAbilityUi;
+    [SerializeField]
+    GameObject selectCharcterUi;
+
+
+    [SerializeField]
     PlayerUiElemnt PlayerUiElemnt;
+    [SerializeField]
+    ShowModels showModels;
+    
 
     GameObject[] ablitiesArray;
 
     float playerAbilityCount;
+
+    public Abilites abilitesIndex;
+    public int  playerIndex;
 
     public enum Abilites
     {
@@ -57,9 +69,12 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        selectAbilityUi.SetActive(true);
+        selectCharcterUi.SetActive(false);
         gameOverObj.SetActive(false);
         victoryGameObj.SetActive(false);
         pauseGameObj.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -137,7 +152,20 @@ public class UiManager : MonoBehaviour
         // 3  -- Wind
         // 4  -- ice
 
-        Abilites foo = (Abilites)index;
-        Debug.Log("index " + foo  );
+        abilitesIndex = (Abilites)index;
+        Debug.Log("index " + abilitesIndex  );
+    }
+
+    public void Selectplayer()
+    {
+        selectAbilityUi.SetActive(false);
+        selectCharcterUi.SetActive(true);
+    }
+
+    public void OncSelectcharcter()
+    {
+      
+        playerIndex =showModels.selectedPlayer ; 
+        Debug.Log("index " + playerIndex);
     }
 }

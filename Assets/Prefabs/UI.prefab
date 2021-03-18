@@ -390,7 +390,11 @@ MonoBehaviour:
   gameOverObj: {fileID: 2510261605190291430}
   pauseGameObj: {fileID: 2510261605138707957}
   victoryGameObj: {fileID: 2510261605138707957}
+  selectAbilityUi: {fileID: 0}
+  selectCharcterUi: {fileID: 0}
   PlayerUiElemnt: {fileID: 11400000, guid: 64822bebec37e0c4fbe9a2f56d77135b, type: 2}
+  abilitesIndex: 0
+  playerIndex: 0
 --- !u!1 &2510261604508455676
 GameObject:
   m_ObjectHideFlags: 0
