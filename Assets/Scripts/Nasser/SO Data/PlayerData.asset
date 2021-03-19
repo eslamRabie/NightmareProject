@@ -15,4 +15,3 @@ MonoBehaviour:
   PlayerIcon: {fileID: 21300000, guid: b4db6ad326ce5ef4faca9d93c56f6b29, type: 3}
   PlayerAbilities:
   - {fileID: 11400000, guid: 839606bb23c6de14fa8ffed25e5a3e64, type: 2}
-  - {fileID: 11400000, guid: adddb7ff9d636724eba6232b2e4c265c, type: 2}

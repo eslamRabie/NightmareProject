@@ -10,4 +10,5 @@ public class PlayerAbility : ScriptableObject
     public Sprite AbilityIcon;
     public Sprite AbilityValueIcon;
     public float AbilityValue;
+    public float MaxAbilityValue;
 }

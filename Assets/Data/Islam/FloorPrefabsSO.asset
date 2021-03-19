@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FloorPrefabsSO
   m_EditorClassIdentifier: 
   floorPrefabs:
-  - {fileID: 4074039177734946203, guid: 4fbe2e39f370e5c42a0c4fa112383dda, type: 3}
-  - {fileID: 6297534953368197731, guid: 4a909f0bee5206e41801eed144eeb733, type: 3}
-  - {fileID: 5505230511167757371, guid: 8a5737e0cfff5c84b95a84f267c4038d, type: 3}
-  - {fileID: 3760776502431006507, guid: d731b815d1c3cf041a5268063ee72c14, type: 3}
-  - {fileID: 1757876343482777214, guid: 638c7804e225f2c4aaedf1b8625d0d96, type: 3}
+  - {fileID: 3863722860293161524, guid: 0fcdada9f8d9d0c4392de31d1da6f328, type: 3}
+  - {fileID: 3863722860293161524, guid: 5fb4a61d6f589c944af402538305900a, type: 3}
+  - {fileID: 3863722860293161524, guid: 39fb82f8419bcca45807652b86960fca, type: 3}
+  - {fileID: 3863722860293161524, guid: 84bf396484e723f469af5771707f9100, type: 3}
+  - {fileID: 3863722860293161524, guid: 3a27ba647456b964ab091cf066421caa, type: 3}

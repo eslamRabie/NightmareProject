@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -91,6 +92,7 @@ public class UiManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+        
     }
     public void OnUiButtonRestart()
     {
@@ -98,12 +100,12 @@ public class UiManager : MonoBehaviour
     }
     public void OnUiButtonNextLvel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        victoryGameObj.SetActive(false);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OnUiButtonResume()
     {
        // Time.timeScale = 1;
-        Debug.Log("called ");
         pauseGameObj.SetActive(false);
     }
 
@@ -119,9 +121,12 @@ public class UiManager : MonoBehaviour
     [ContextMenu("puase")]
     public void OnUiPuasedPannelCalled()
     {
-        //Time.timeScale = 0;
+        Debug.Log("Test q");
+        pauseGameObj.SetActive(false);
+        Debug.Log(pauseGameObj.active);
         pauseGameObj.SetActive(true);
-        
+        Debug.Log(pauseGameObj.active);
+
     }
 
     [ContextMenu("Decrise ")]
@@ -130,7 +135,8 @@ public class UiManager : MonoBehaviour
         if (PlayerUiElemnt.PlayerAbilities[0].AbilityValue > 0)
         {
             PlayerUiElemnt.PlayerAbilities[0].AbilityValue -= 1f;
-            ablitiesArray[0].transform.GetChild(1).GetComponent<Image>().fillAmount = PlayerUiElemnt.PlayerAbilities[0].AbilityValue / 10;
+            ablitiesArray[0].transform.GetChild(1).GetComponent<Image>().fillAmount = 
+                PlayerUiElemnt.PlayerAbilities[0].AbilityValue / PlayerUiElemnt.PlayerAbilities[0].MaxAbilityValue;
             ablitiesArray[0].transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = ((int)PlayerUiElemnt.PlayerAbilities[0].AbilityValue).ToString();
         }
     }

@@ -6,8 +6,8 @@ namespace Level
     public class LevelDifficultySO : ScriptableObject
     {
         [SerializeField][Range(1, 100)] public int playerElementPercentage;
-        [SerializeField] public float averageDistanceToMysteryBox;
-        [SerializeField][Range(0, 1)] public float pathCostExtraMarginPercentage;
-        [SerializeField] public int numberOfHiddenEnemies;
+        //[SerializeField] public float averageDistanceToMysteryBox;
+       // [SerializeField][Range(0, 1)] public float pathCostExtraMarginPercentage;
+        //[SerializeField] public int numberOfHiddenEnemies;
     }
 }

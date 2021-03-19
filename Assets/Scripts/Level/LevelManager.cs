@@ -19,6 +19,7 @@ namespace Level
         private int _numOfPlayers;
         private GameObject _currentLevelParent;
         private List<GameObject> _mysteryBoxesList;
+        private int _playerLevel;
 
 
         public LevelManager(FloorPrefabsSO floorPrefabs, MysteryBoxPrefabsSO mysteryBoxPrefabs,
@@ -47,7 +48,7 @@ namespace Level
             _isLevelCreated = true;
 
             ClearGridList();
-            
+            _playerLevel = playerLevel;
             _currentLevelParent = new GameObject();
             Vector3 gridOrigin = Vector3.up * 5;
             int levelGridSize = _basicGridSize + playerLevel;
@@ -61,7 +62,12 @@ namespace Level
 
             }
             
-            DistributeMysteryBoxes();
+            for (int i = 0; i < _mysteryBoxesList.Count; i++)
+            {
+                var tmp = _mysteryBoxesList[i];
+                _mysteryBoxesList[i] = null;
+                GameObject.Destroy(tmp);
+            }
             
             return _currentLevelParent;
         }
@@ -92,24 +98,17 @@ namespace Level
 
         void CalculateDifficulty(int playerLevel)
         {
-            float maxMapDistance;
-            //_levelDifficulty.playerElementPercentage = Mathf.Clamp(60 - (playerLevel / _maxNumberOfLevels), 0, 100);
-            _levelDifficulty.numberOfHiddenEnemies = _numOfPlayers * Random.Range(1, 4);
+            _levelDifficulty.playerElementPercentage = Random.Range(0, 50 - playerLevel);
+            //_levelDifficulty.numberOfHiddenEnemies = _numOfPlayers * Random.Range(1, 4);
             //_levelDifficulty.averageDistanceToMysteryBox = null;
             //_levelDifficulty.pathCostExtraMarginPercentage = 
 
         }
 
 
-        void DistributeMysteryBoxes()
+        public void DistributeMysteryBoxes()
         {
-            for (int i = 0; i < _mysteryBoxesList.Count; i++)
-            {
-                var tmp = _mysteryBoxesList[i];
-                _mysteryBoxesList[i] = null;
-                GameObject.Destroy(tmp);
-            }
-            
+
             foreach (var boxType in _mysteryBoxPrefabs.mysteryBoxPrefabs)
             {
                 var poses = DistributePlayers();
@@ -133,13 +132,13 @@ namespace Level
             foreach (var grid in _leveGridList)
             {
                 GameGrid.AaBb aabb = grid.GetAABB();
-                var cellSize = _floorPrefabs.floorPrefabs[0].transform.localScale.x;
+                var cellSize = _floorPrefabs.floorPrefabs[0].transform.localScale.y;
                 /*playerPositions.Add(new Vector3(Random.Range(aabb.TopLeft.x, aabb.BottomLeftDeltaX.x), aabb.TopLeft.y,
                     Random.Range(aabb.TopLeft.z, aabb.TopRightDeltaZ.z)));*/
                 playerPositions.Add(new Vector3(
-                    aabb.TopLeft.x + (Random.Range(0, _basicGridSize + 1) * cellSize),
-                    aabb.TopLeft.y + cellSize / 2.0f ,
-                    aabb.TopLeft.z + Random.Range(0, _basicGridSize + 1) * cellSize
+                    aabb.TopLeft.x + (Random.Range(0, _basicGridSize + _playerLevel) * cellSize),
+                    aabb.TopLeft.y + (cellSize / 2.0f),
+                    aabb.TopLeft.z + Random.Range(0, _basicGridSize + _playerLevel) * cellSize
                     ));
                 
             }

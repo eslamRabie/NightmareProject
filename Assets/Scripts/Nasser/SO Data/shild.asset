@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04abfc20d723bbd48aeb16ff2fdc8f7a, type: 3}
   m_Name: shild
   m_EditorClassIdentifier: 
-  AbilityIcon: {fileID: 21300000, guid: 5246368e040a65944ac9cfed75140029, type: 3}
+  AbilityIcon: {fileID: 21300000, guid: ddda361c522b5224e9064e774c1d03ac, type: 3}
   AbilityValueIcon: {fileID: 21300000, guid: 855664df5f466a84ca2429c926a665dd, type: 3}
   AbilityValue: 6

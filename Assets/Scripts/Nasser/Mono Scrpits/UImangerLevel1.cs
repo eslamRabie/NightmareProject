@@ -24,8 +24,8 @@ public class UImangerLevel1 : MonoBehaviour
 
     float playerAbilityCount;
 
-    public Abilites abilitesIndex;
-    public int playerIndex;
+    [HideInInspector] public Abilites abilitesIndex;
+    [HideInInspector] public int playerIndex;
 
     public enum Abilites
     {

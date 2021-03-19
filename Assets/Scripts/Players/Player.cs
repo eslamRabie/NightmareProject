@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
+using Random = UnityEngine.Random;
+
 
 namespace Players
 {
@@ -17,7 +19,6 @@ namespace Players
         private float _mana;
         private bool _isDead = false;
 
-        //private CinemachineFreeLook _playerCamera;
         public int PlayerLevel { get; set; }
 
         private bool _isPause;
@@ -29,10 +30,8 @@ namespace Players
         {
             gameObject.SetActive(false);
             _animator = GetComponentInChildren<Animator>();
-            
-            /*_playerCamera = GetComponentInChildren<CinemachineFreeLook>();
-            CinemachineCore.GetInputAxis = GetAxisCustom;*/
-            
+            _isPause = true;
+
         }
 
         
@@ -62,66 +61,35 @@ namespace Players
                 _playerMovement.UpdateMovementVector(context.ReadValue<Vector2>());
             
         }
-        
-        
-        
-        public void ControllCamera(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                RotateCamera(context.ReadValue<Vector2>());
-            }
-        }
 
-        public float GetAxisCustom(string axisName)
-        {
-            var LookDelta = _deltaMouse;
-            LookDelta.Normalize();
-            if (axisName == "Mouse X")
-            {
-                return LookDelta.x;
-            }
-            if (axisName == "Mouse Y")
-            {
-                Debug.Log(LookDelta);
-                _deltaMouse = Vector2.zero;
-                return LookDelta.y;
-            }
-            return 0;
-        }
-        
-        
-        void RotateCamera(Vector2 delta)
-        {
-            _deltaMouse = delta;
-        }
-        
-        
+
         private void FixedUpdate()
         {
-            if (!_isDead)
+            if (!_isDead && !_isPause)
             {
                 if (_playerAgent.isOnNavMesh)
                 {
                     _playerAgent.destination = _playerMovement.MovePlayer(transform);;
                 }
-                _animator.SetFloat("SpeedZ", _playerAgent.velocity.sqrMagnitude);
             }
+            _animator.SetFloat("SpeedZ", _playerAgent.velocity.sqrMagnitude);
         }
         
         
-        void ConfigureAgent(float stoppingDistance, float angularSpeed, float speed, float acceleration)
+        async void ConfigureAgent(float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
-            NavMeshBuilder.BuildNavMesh();
+            _isPause = true;
+            await Task.Delay(100);
             //if(NavMeshBuilder.isRunning) Debug.Log("running");
-            _playerAgent = gameObject.AddComponent<NavMeshAgent>();
+            _playerAgent = gameObject.GetComponent<NavMeshAgent>();
             _playerAgent.stoppingDistance = stoppingDistance;
             _playerAgent.angularSpeed = angularSpeed;
             _playerAgent.speed = speed;
             _playerAgent.acceleration = acceleration;
-            //_playerAgent.baseOffset = 0.4f;
+            _playerAgent.baseOffset = 0;
             _playerAgent.height = 1;
             _playerAgent.radius = 0.25f;
+            _isPause = false;
         }
 
         public void SetPosition(Vector3 position)
@@ -153,16 +121,18 @@ namespace Players
             {
                 _animator.SetBool("IsDead", true);
                 _isDead = true;
+                _playerAgent.velocity = Vector3.zero;
+                _playerAgent.destination = transform.position;
             }
         }
-
-        private void OnCollisionEnter(Collision other)
+        
+        private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.CompareTag(_element))
-            {
+            {   
+                Debug.Log(_mana);
                 UpdateMana(-1);
                // _animator.SetTrigger("Pain");
-                Debug.Log(_mana);
             }
             
         }
@@ -171,12 +141,31 @@ namespace Players
         {
             return _isDead;
         }
-        
-        
-        public void CalculateMana(float basicGridSize, int maxNumOfLevels)
+
+
+        public void PusePlayer()
         {
-            _mana = basicGridSize / (PlayerLevel / (float)maxNumOfLevels);
+            _isPause = true;
+            _playerAgent.velocity = Vector3.zero;
+        }
+        public void UnPusePlayer()
+        {
+            _isPause = false;
+        }
+        
+        public float CalculateMana(float basicGridSize, int maxNumOfLevels)
+        {
+            _mana = (int)Random.Range((PlayerLevel + basicGridSize), (PlayerLevel + basicGridSize) * 2);
+            return _mana;
         }
        
+        async void DecreaseMana()
+        {
+            await Task.Delay(100);
+            _mana--;
+        }
+
+        
+        
     }
 }
