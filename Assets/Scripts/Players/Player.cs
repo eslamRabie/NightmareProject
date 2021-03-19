@@ -19,6 +19,8 @@ namespace Players
         private float _mana;
         private bool _isDead = false;
 
+        private Rigidbody _rg;
+        
         public int PlayerLevel { get; set; }
 
         private bool _isPause;
@@ -31,7 +33,7 @@ namespace Players
             gameObject.SetActive(false);
             _animator = GetComponentInChildren<Animator>();
             _isPause = true;
-
+            _rg = GetComponent<Rigidbody>();
         }
 
         
@@ -71,22 +73,25 @@ namespace Players
                 {
                     _playerAgent.destination = _playerMovement.MovePlayer(transform);;
                 }
+                _animator.SetFloat("SpeedZ", _playerAgent.velocity.sqrMagnitude);
             }
-            _animator.SetFloat("SpeedZ", _playerAgent.velocity.sqrMagnitude);
+            else
+            {
+                _animator.SetFloat("SpeedZ", 0);
+            }
         }
         
         
         async void ConfigureAgent(float stoppingDistance, float angularSpeed, float speed, float acceleration)
         {
             _isPause = true;
-            await Task.Delay(100);
             //if(NavMeshBuilder.isRunning) Debug.Log("running");
             _playerAgent = gameObject.GetComponent<NavMeshAgent>();
             _playerAgent.stoppingDistance = stoppingDistance;
             _playerAgent.angularSpeed = angularSpeed;
             _playerAgent.speed = speed;
             _playerAgent.acceleration = acceleration;
-            _playerAgent.baseOffset = 0;
+            _playerAgent.baseOffset = -0.07f;
             _playerAgent.height = 1;
             _playerAgent.radius = 0.25f;
             _isPause = false;
@@ -121,8 +126,6 @@ namespace Players
             {
                 _animator.SetBool("IsDead", true);
                 _isDead = true;
-                _playerAgent.velocity = Vector3.zero;
-                _playerAgent.destination = transform.position;
             }
         }
         
@@ -130,7 +133,6 @@ namespace Players
         {
             if (!other.gameObject.CompareTag(_element))
             {   
-                Debug.Log(_mana);
                 UpdateMana(-1);
                // _animator.SetTrigger("Pain");
             }
@@ -146,7 +148,6 @@ namespace Players
         public void PusePlayer()
         {
             _isPause = true;
-            _playerAgent.velocity = Vector3.zero;
         }
         public void UnPusePlayer()
         {

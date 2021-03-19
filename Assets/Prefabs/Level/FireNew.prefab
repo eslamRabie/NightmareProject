@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6958280852687135861}
-  - component: {fileID: -2094268526334325825}
+  - component: {fileID: -8512876658921561615}
   m_Layer: 0
-  m_Name: IceNew
-  m_TagString: Ice
+  m_Name: FireNew
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-2094268526334325825
+--- !u!65 &-8512876658921561615
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3863722860293161524}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7ae3724830a338b4d9b8f62714dd1742, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e1cbfa5c73b45484cb637a70e5c81635, type: 2}
+      objectReference: {fileID: 2100000, guid: 7381fadbdd8813b459f2f969dd9d1cdd, type: 2}
     - target: {fileID: 919132149155446097, guid: 7ae3724830a338b4d9b8f62714dd1742, type: 3}
       propertyPath: m_Name
       value: cube
